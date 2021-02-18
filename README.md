@@ -1,5 +1,7 @@
+<img src="./assets/images/flatironschool_banner.jpg" width=800px>
+
 # Online-DS-FT-022221-Cohort-Notes
-- All content from study groups will be added to this repository either shortly before or immediately after class.
+- All content from study groups for the online data science 022221 cohort will be added to this repository 
 
 ## Repo Organization
 - Each phase will have its own folder. (e.g. "Phase_1")
