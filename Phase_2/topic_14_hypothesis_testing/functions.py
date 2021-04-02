@@ -1,8 +1,8 @@
 import pandas as pd
 
-import scipy.stats as stats
 import pandas as pd
 import numpy as np
+import scipy.stats as stats
 
 def Cohen_d(group1, group2, correction = False):
     """Compute Cohen's d

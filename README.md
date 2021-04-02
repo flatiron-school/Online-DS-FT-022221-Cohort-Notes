@@ -79,6 +79,18 @@ If your local branch didn't have any unique commits, Git will instead perform a 
 
 > Tip: Syncing your fork only updates your local copy of the repository. To update your fork on GitHub, you must push your changes.
 
-
+## Importing the `functions_SG.py` in topic study group notebooks
+- Add the following block of code to your notebook
+- Change the `py_folder` path to reflect where the repo's py_files folder is relative to the notebook you are adding this to.
+```python
+## Importing our study group functions
+%load_ext autoreload
+%autoreload 2
+import sys
+    
+py_folder = "../../py_files/" # CHANGE TO REFECT YOUR NOTEBOOKS LOCATION COMPARED TO THE PY_FILES FOLDER
+sys.path.append(py_folder)
+import functions_SG as sg
+```
 
  
