@@ -214,3 +214,26 @@ def prep_data_for_tukeys(data, data_col = 'data',group_col='group'):
     df_tukey[group_col] = df_tukey[group_col].astype('str')
     df_tukey[data_col] = df_tukey[data_col].astype('float')
     return df_tukey
+
+
+
+## Check for outliers
+from scipy import stats
+def find_outliers_z(data):
+    """Detects outliers using the Z-score>3 cutoff.
+    Returns a boolean Series where True=outlier"""
+    zFP = np.abs(stats.zscore(data))
+    zFP = pd.Series(zFP, index=data.index)
+    idx_outliers = zFP > 3
+    return idx_outliers
+
+
+def find_outliers_IQR(data):
+    """Detects outliers using the 1.5*IQR thresholds.
+    Returns a boolean Series where True=outlier"""
+    res = data.describe()
+    q1 = res['25%']
+    q3 = res['75%']
+    thresh = 1.5*(q3-q1)
+    idx_outliers =(data < (q1-thresh)) | (data > (q3+thresh))
+    return idx_outliers
