@@ -122,72 +122,72 @@ def Cohen_d(group1, group2, correction = False):
 
 
 #Your code here
-def find_outliers_Z(data):
-    """Use scipy to calculate absolute Z-scores 
-    and return boolean series where True indicates it is an outlier.
+# def find_outliers_Z(data):
+#     """Use scipy to calculate absolute Z-scores 
+#     and return boolean series where True indicates it is an outlier.
 
-    Args:
-        data (Series,or ndarray): data to test for outliers.
+#     Args:
+#         data (Series,or ndarray): data to test for outliers.
 
-    Returns:
-        [boolean Series]: A True/False for each row use to slice outliers.
+#     Returns:
+#         [boolean Series]: A True/False for each row use to slice outliers.
         
-    EXAMPLE USE: 
-    >> idx_outs = find_outliers_df(df['AdjustedCompensation'])
-    >> good_data = df[~idx_outs].copy()
-    """
-    import pandas as pd
-    import numpy as np
-    import scipy.stats as stats
-    import pandas as pd
-    import numpy as np
-    ## Calculate z-scores
-    zs = stats.zscore(data)
+#     EXAMPLE USE: 
+#     >> idx_outs = find_outliers_df(df['AdjustedCompensation'])
+#     >> good_data = df[~idx_outs].copy()
+#     """
+#     import pandas as pd
+#     import numpy as np
+#     import scipy.stats as stats
+#     import pandas as pd
+#     import numpy as np
+#     ## Calculate z-scores
+#     zs = stats.zscore(data)
     
-    ## Find z-scores >3 awayfrom mean
-    idx_outs = np.abs(zs)>3
+#     ## Find z-scores >3 awayfrom mean
+#     idx_outs = np.abs(zs)>3
     
-    ## If input was a series, make idx_outs index match
-    if isinstance(data,pd.Series):
-        return pd.Series(idx_outs,index=data.index)
-    else:
-        return pd.Series(idx_outs)
+#     ## If input was a series, make idx_outs index match
+#     if isinstance(data,pd.Series):
+#         return pd.Series(idx_outs,index=data.index)
+#     else:
+#         return pd.Series(idx_outs)
     
     
     
-def find_outliers_IQR(data):
-    """Use Tukey's Method of outlier removal AKA InterQuartile-Range Rule
-    and return boolean series where True indicates it is an outlier.
-    - Calculates the range between the 75% and 25% quartiles
-    - Outliers fall outside upper and lower limits, using a treshold of  1.5*IQR the 75% and 25% quartiles.
+# def find_outliers_IQR(data):
+#     """Use Tukey's Method of outlier removal AKA InterQuartile-Range Rule
+#     and return boolean series where True indicates it is an outlier.
+#     - Calculates the range between the 75% and 25% quartiles
+#     - Outliers fall outside upper and lower limits, using a treshold of  1.5*IQR the 75% and 25% quartiles.
 
-    IQR Range Calculation:    
-        res = df.describe()
-        IQR = res['75%'] -  res['25%']
-        lower_limit = res['25%'] - 1.5*IQR
-        upper_limit = res['75%'] + 1.5*IQR
+#     IQR Range Calculation:    
+#         res = df.describe()
+#         IQR = res['75%'] -  res['25%']
+#         lower_limit = res['25%'] - 1.5*IQR
+#         upper_limit = res['75%'] + 1.5*IQR
 
-    Args:
-        data (Series,or ndarray): data to test for outliers.
+#     Args:
+#         data (Series,or ndarray): data to test for outliers.
 
-    Returns:
-        [boolean Series]: A True/False for each row use to slice outliers.
+#     Returns:
+#         [boolean Series]: A True/False for each row use to slice outliers.
         
-    EXAMPLE USE: 
-    >> idx_outs = find_outliers_df(df['AdjustedCompensation'])
-    >> good_data = df[~idx_outs].copy()
+#     EXAMPLE USE: 
+#     >> idx_outs = find_outliers_df(df['AdjustedCompensation'])
+#     >> good_data = df[~idx_outs].copy()
     
-    """
-    df_b=data
-    res= df_b.describe()
+#     """
+#     df_b=data
+#     res= df_b.describe()
 
-    IQR = res['75%'] -  res['25%']
-    lower_limit = res['25%'] - 1.5*IQR
-    upper_limit = res['75%'] + 1.5*IQR
+#     IQR = res['75%'] -  res['25%']
+#     lower_limit = res['25%'] - 1.5*IQR
+#     upper_limit = res['75%'] + 1.5*IQR
 
-    idx_outs = (df_b>upper_limit) | (df_b<lower_limit)
+#     idx_outs = (df_b>upper_limit) | (df_b<lower_limit)
 
-    return idx_outs
+#     return idx_outs
 
 
 def prep_data_for_tukeys(data, data_col = 'data',group_col='group'):
@@ -237,3 +237,13 @@ def find_outliers_IQR(data):
     thresh = 1.5*(q3-q1)
     idx_outliers =(data < (q1-thresh)) | (data > (q3+thresh))
     return idx_outliers
+
+def multiplot(df_model,figsize=(10,10),cmap="Reds"):
+    
+    corr = df_model.corr()
+    mask = np.zeros_like(corr)
+    mask[np.triu_indices_from(mask)] = True
+
+    fig, ax = plt.subplots(figsize=figsize)
+    sns.heatmap(corr, annot=True,cmap="Reds",mask=mask)
+    return fig, ax
