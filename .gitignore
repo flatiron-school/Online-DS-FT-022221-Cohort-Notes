@@ -136,5 +136,8 @@ Phase_4/topic_40-41_neural_networks/~$intro_to_bio_neural_networks_v2.pptx
 Phase_4/topic_42_tuning_neural_networks/logs/*
 Phase_4/topic_42_tuning_neural_networks/models/*
 
-Phase_4/topic_42_tuning_neural_networks/other_notebooks/logs/
-Phase_4/topic_42_tuning_neural_networks/other_notebooks/models/
+Phase_4/topic_42_tuning_neural_networks/other_notebooks/logs/*
+Phase_4/topic_42_tuning_neural_networks/other_notebooks/models/*
+
+Phase_4/topic_42_tuning_neural_networks/instructor/logs/*
+Phase_4/topic_42_tuning_neural_networks/instructor/models/*
