@@ -1,0 +1,12 @@
+## Filepaths for databricks 
+
+### PANDAS/FileStore
+/dbfs/FileStore/shared_uploads/james.irving@flatironschool.com/Video_Games.csv
+
+import pandas as pd
+df1 = pd.read_csv("/dbfs/FileStore/shared_uploads/james.irving@flatironschool.com/Video_Games.csv")
+
+
+### SPARK
+dbfs:/FileStore/shared_uploads/james.irving@flatironschool.com/Video_Games.csv
+df1 = spark.read.format("csv").load("dbfs:/FileStore/shared_uploads/james.irving@flatironschool.com/Video_Games.csv")
